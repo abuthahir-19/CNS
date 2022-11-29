@@ -107,7 +107,9 @@ public class PlayFairCipher {
         ob.generateKeyTable(key, keyT);
         char[] pt = ob.prepareText(plain).toCharArray();
 
-        System.out.print (ob.encrypt(pt, keyT));
+        System.out.println ("Plain Text : " + plain);
+        System.out.println ("Encrypted Cipher Text : " + ob.encrypt(pt, keyT));
+        // System.out.println ("Decrypted Plain Text : " +);
         in.close();
     }
 }
