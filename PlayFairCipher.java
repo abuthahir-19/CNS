@@ -153,8 +153,8 @@ public class PlayFairCipher {
 
     public static void main(String[] args) {
         Scanner in = new Scanner (System.in);
-        String plain = in.next();
-        char[] key = in.next().toCharArray();
+        String plain = in.next().toLowerCase();
+        char[] key = in.next().toLowerCase().toCharArray();
         char[][] keyT = new char[5][5];
         
         PlayFairCipher ob = new PlayFairCipher();
