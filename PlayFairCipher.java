@@ -66,6 +66,49 @@ public class PlayFairCipher {
         }
         return ret;
     }
+
+    public char[] dsearch (char a, char b, char[][] keyT) {
+        int r1, c1, r2, c2;
+        r1 = c1 = r2 = c2 = 0;
+        char[] ret = new char[2];
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (keyT[i][j] == a) {
+                    r1 = i; c1 = j;
+                }
+
+                if (keyT[i][j] == b) {
+                    r2 = i; c2 = j;
+                }
+            }
+        }
+
+        //same column
+        if (c1 == c2) {
+            r1 = (r1 - 1) % 5;
+            r2 = (r2 - 1) % 5;
+            if (r1 == -1) r1 = 4;
+            if (r2 == -1) r2 = 4;
+            ret[0] = keyT[r1][c1];
+            ret[1] = keyT[r2][c2];
+        }
+
+        //same row
+        if (r1 == r2) {
+            c1 = (c1 - 1) % 5;
+            c2 = (c2 - 1) % 5;
+            if (c1 == -1) c1 = 4;
+            if (c2 == -1) c2 = 4;
+            ret[0] = keyT[r1][c1];
+            ret[1] = keyT[r2][c2];
+        }
+        else {
+            ret[0] = keyT[r1][c2];
+            ret[1] = keyT[r2][c1];
+        }
+        return ret;
+    }
+
     public String encrypt (char[] pt, char[][] keyT) {
         String cipherText = "";
         for (int i = 0; i < pt.length; i+=2) {
@@ -75,6 +118,17 @@ public class PlayFairCipher {
             cipherText += (ret[0] + "" + ret[1]);
         }
         return cipherText;
+    }
+
+    public String decrypt (char[] pt, char[][] keyT) {
+        String plainText = "";
+        for (int i = 0; i < pt.length; i+=2) {
+            char f = pt[i];
+            char s = pt[i+1];
+            char[] ret = dsearch(f, s, keyT);
+            plainText += (ret[0] + "" + ret[1]);
+        }
+        return plainText;
     }
 
     public String prepareText (String plain) {
@@ -109,7 +163,7 @@ public class PlayFairCipher {
 
         System.out.println ("Plain Text : " + plain);
         System.out.println ("Encrypted Cipher Text : " + ob.encrypt(pt, keyT));
-        // System.out.println ("Decrypted Plain Text : " +);
+        System.out.println ("Decrypted Plain Text : " + ob.decrypt(ob.encrypt(pt, keyT).toCharArray(), keyT));
         in.close();
     }
 }
