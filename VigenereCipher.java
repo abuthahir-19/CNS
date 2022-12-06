@@ -62,7 +62,7 @@ public class VigenereCipher {
         System.out.println ("Input Message : " + msg);
         String enc = encrypt(msg, key);
         System.out.println ("Encrypted Cipher Text : " + enc);
-        System.out.println ("Decrypted Plain Text : " + decrypt(enc, key).toLowerCase());
+        System.out.println ("Decrypted Plain Text : " + decrypt(enc, key).toUpperCase());
         in.close();
     }
 }
