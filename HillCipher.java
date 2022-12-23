@@ -131,10 +131,10 @@ public class HillCipher {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println ("Enter the plain text : ");
-        String plain = in.next();
+        String plain = in.next().toUpperCase();
         System.out.println ("Enter the key : ");
-        String key = in.next();
-        String enc = "";
+        String key = in.next().toUpperCase();
+        String enc = "", dec = "";
         int end = 3;
         int[][] keyMatrix = new int[3][3];
         int[][] adj = new int[3][3];
@@ -149,14 +149,25 @@ public class HillCipher {
             enc += encrypt(keyMatrix, sub);
             end += 3;
         }
-
         adj = getAdjointMatrix(keyMatrix);
         kInv = getKInverse(adj, getDeterminant(keyMatrix));
+
+        end = 3;
+        for (int i = 0; i < enc.length(); i+=3) {
+            String sub = "";
+            for (int j = i; j < end; j++) {
+                sub += enc.charAt(j);
+            }
+            System.out.println (sub);
+            dec += decrypt(kInv, sub);
+            end += 3;
+        }
+
         System.out.println ("---------------------------------------");
         System.out.println ("Simulating Hill Cipher");
         System.out.println ("Actual Input Message : " + plain);
         System.out.println ("Encrypted Cipher Text : " + enc);
-        System.out.println ("Decrypted Plain Text : " + decrypt(kInv, enc));
+        System.out.println ("Decrypted Plain Text : " + dec);
         in.close();
     }
 }
@@ -167,4 +178,7 @@ GYBNQKURP
 
 PEN
 ACTIVATED
+
+PAYMOREMONEY
+RRFVSVCCT
  */
