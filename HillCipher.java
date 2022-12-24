@@ -158,13 +158,12 @@ public class HillCipher {
             for (int j = i; j < end; j++) {
                 sub += enc.charAt(j);
             }
-            System.out.println (sub);
             dec += decrypt(kInv, sub);
             end += 3;
         }
 
-        System.out.println ("---------------------------------------");
-        System.out.println ("Simulating Hill Cipher");
+        System.out.println ("");
+        System.out.println ("------------------------Simulating Hill Cipher------------------------");
         System.out.println ("Actual Input Message : " + plain);
         System.out.println ("Encrypted Cipher Text : " + enc);
         System.out.println ("Decrypted Plain Text : " + dec);
@@ -181,4 +180,7 @@ ACTIVATED
 
 PAYMOREMONEY
 RRFVSVCCT
+
+ASK
+THISISKEY
  */
